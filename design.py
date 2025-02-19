@@ -5,30 +5,6 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
-def import_csv():
-    """Import data from a CSV file."""
-    file_path = filedialog.askopenfilename(
-        filetypes=[("CSV files", ".csv"), ("All files", ".*")]
-    )
-    if file_path:
-        try:
-            # Read the CSV file
-            data = pd.read_csv(file_path)
-            # Display column options
-            columns = list(data.columns)
-            if len(columns) < 2:
-                result_label.config(text="Error: CSV must have at least two columns")
-                return
-
-
-            x_dropdown["values"] = columns
-            y_dropdown["values"] = columns
-            result_label.config(text="CSV loaded successfully! Select columns for X and Y.")
-            global csv_data
-            csv_data = data
-        except Exception as e:
-            result_label.config(text=f"Error reading CSV: {e}")
-
 
 def plot_from_csv():
     """Plot the graph using selected CSV columns."""
